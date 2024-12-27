@@ -277,11 +277,11 @@ impl SchemaAdapter {
         let mut projection = Vec::with_capacity(projected_schema.fields().len());
         let mut field_mappings = vec![None; self.table_schema.fields().len()];
 
-        for nameColumn in orc_file_meta.root_data_type().children() {
+        for name_column in orc_file_meta.root_data_type().children() {
             if let Some((table_idx, _table_field)) =
-            projected_schema.fields().find(nameColumn.name()) {
+            projected_schema.fields().find(name_column.name()) {
                 field_mappings[table_idx] = Some(projection.len());
-                projection.push(nameColumn.data_type().column_index());
+                projection.push(name_column.data_type().column_index());
             }
         }
 
